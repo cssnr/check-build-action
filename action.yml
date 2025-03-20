@@ -1,0 +1,50 @@
+name: "Check Build Action"
+description: "Check Build Action"
+author: "Shane"
+branding:
+  icon: "type"
+  color: "green"
+
+inputs:
+  build:
+    description: "Build Command to Run"
+    required: false
+    default: "npm run build"
+  check:
+    description: "Check Command to Run"
+    required: false
+    default: "git diff --quiet dist"
+  path:
+    description: "Path to Verify First"
+    required: false
+    default: ""
+  comment:
+    description: "Add Comment to PR"
+    required: false
+    default: "true"
+  message:
+    description: "Message for Comment"
+    required: false
+    default: "Run: `npm run build`"
+  mention:
+    description: "Mention Actor with @"
+    required: false
+    default: "true"
+  summary:
+    description: "Add Workflow Job Summary"
+    required: false
+    default: "true"
+  token:
+    description: "GitHub Token"
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  id:
+    description: "Comment ID"
+  error:
+    description: "Error Message"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
