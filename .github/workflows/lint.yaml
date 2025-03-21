@@ -138,12 +138,12 @@ jobs:
             exit 1
           fi
 
-      - name: "Verify Failed"
-        if: ${{ failure() && github.event_name == 'pull_request' }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "Adding comment to PR number: ${{ github.event.number }}"
-          comment='@${{ github.triggering_actor }} - run `npm run build` then add, commit and push the `dist` folder.'
-          echo "${comment}"
-          gh pr comment ${{ github.event.number }} --body "${comment}"
+      #- name: "Verify Failed"
+      #  if: ${{ failure() && github.event_name == 'pull_request' }}
+      #  env:
+      #    GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  run: |
+      #    echo "Adding comment to PR number: ${{ github.event.number }}"
+      #    comment='@${{ github.triggering_actor }} - run `npm run build` then add, commit and push the `dist` folder.'
+      #    echo "${comment}"
+      #    gh pr comment ${{ github.event.number }} --body "${comment}"

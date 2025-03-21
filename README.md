@@ -38,7 +38,7 @@ All options are configurable.
 | :------ | :--: | :---------------------- | :-------------------------- |
 | build   |  -   | `npm run build`         | Build Command to Run \*     |
 | check   |  -   | `git diff --quiet dist` | Check Command to Run \*     |
-| path    |  -   | -                       | Patho to Verify Exist \*    |
+| path    |  -   | -                       | Path to Verify Exist \*     |
 | comment |  -   | `true`                  | Add Comment to PR \*        |
 | message |  -   | _see below_             | Message for Comment \*      |
 | mention |  -   | `true`                  | Mention Actor with @ \*     |
@@ -107,8 +107,8 @@ This outputs the changes `json` object and the `markdown` table.
   env:
     ERROR: ${{ steps.outdated.outputs.error }}
   run: |
-    echo "id: '${{ steps.outdated.outputs.id }}'"
-    echo "error: '${{ env.ERROR }}'"
+    echo "id: ${{ steps.outdated.outputs.id }}"
+    echo "error: ${ERROR}"
 ```
 
 Note: due to the way `${{}}` expressions are evaluated, multi-line output gets executed in a run block.
@@ -159,7 +159,7 @@ The following rolling [tags](https://github.com/cssnr/check-build-action/tags) a
 | [![GitHub Tag Minor](https://img.shields.io/github/v/tag/cssnr/check-build-action?sort=semver&filter=!v*.*.*&style=for-the-badge&label=%20&color=blue)](https://github.com/cssnr/check-build-action/releases/latest) |   ✅    |  ✅  |  ❌   | **Minor** | `vN.N.x` | `vN.N`   |
 | [![GitHub Release](https://img.shields.io/github/v/release/cssnr/check-build-action?style=for-the-badge&label=%20&color=red)](https://github.com/cssnr/check-build-action/releases/latest)                           |   ❌    |  ❌  |  ❌   | **Micro** | `vN.N.N` | `vN.N.N` |
 
-You can view the release notes for each version on the [releases](https://github.com/cssnr/cloudflare-purge-cache-action/releases) page.
+You can view the release notes for each version on the [releases](https://github.com/cssnr/check-build-action/releases) page.
 
 The **Major** tag is recommended. It is the most up-to-date and always backwards compatible.
 Breaking changes would result in a **Major** version bump. At a minimum you should use a **Minor** tag.
@@ -174,7 +174,7 @@ Breaking changes would result in a **Major** version bump. At a minimum you shou
 
 ### Planned
 
-- Wait for feature requests...
+- Wait for some [feature requests](https://github.com/cssnr/check-build-action/discussions/categories/feature-requests)...
 
 Want to automatically updated tags on release? Check out: [cssnr/update-version-tags-action](https://github.com/cssnr/update-version-tags-action)  
 Want to check outdated packages on a PR? Check out: [cssnr/npm-outdated-action](https://github.com/cssnr/npm-outdated-action)  

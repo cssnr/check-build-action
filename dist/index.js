@@ -32037,7 +32037,10 @@ async function updatePull(config, error) {
     // Step 4 - Add New Comment IF error
     if (error) {
         console.log('Adding New Comment')
-        const body = `${id}\n@${github.context.payload.sender.login} - ${config.message}`
+        const mention = config.mention
+            ? `@${github.context.payload.sender.login} - `
+            : ''
+        const body = `${id}\n${mention}${config.message}`
         const response = await pull.createComment(body)
         // TODO: Add error handling
         console.log('response.status:', response.status)
