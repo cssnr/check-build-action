@@ -107,8 +107,8 @@ This outputs the changes `json` object and the `markdown` table.
   env:
     ERROR: ${{ steps.outdated.outputs.error }}
   run: |
-    echo "id: '${{ steps.outdated.outputs.id }}'"
-    echo "error: '${{ env.ERROR }}'"
+    echo "id: ${{ steps.outdated.outputs.id }}"
+    echo "error: ${ERROR}"
 ```
 
 Note: due to the way `${{}}` expressions are evaluated, multi-line output gets executed in a run block.
