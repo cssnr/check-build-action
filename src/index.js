@@ -16,7 +16,7 @@ const { Pull } = require('./api')
         // core.startGroup('Debug: process.env')
         // console.log(process.env)
         // core.endGroup() // Debug process.env
-        console.log('sender.login:', github.context.payload.sender.login)
+        console.log('sender.login:', github.context.payload.sender?.login)
         console.log('TRIGGERING_ACTOR:', process.env.GITHUB_TRIGGERING_ACTOR)
 
         // Get Config

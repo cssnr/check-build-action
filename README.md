@@ -7,7 +7,7 @@
 [![Workflow lint](https://img.shields.io/github/actions/workflow/status/cssnr/check-build-action/lint.yaml?logo=github&label=lint)](https://github.com/cssnr/check-build-action/actions/workflows/lint.yaml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=cssnr_check-build-action&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=cssnr_check-build-action)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/cssnr/check-build-action?logo=github&label=updated)](https://github.com/cssnr/check-build-action/graphs/commit-activity)
-[![Codeberg Last Commit](https://img.shields.io/gitea/last-commit/shaner/check-build-action/master?gitea_url=https%3A%2F%2Fcodeberg.org%2F&logo=codeberg&logoColor=white&label=updated)](https://codeberg.org/shaner/check-build-action)
+[![Codeberg Last Commit](https://img.shields.io/gitea/last-commit/cssnr/check-build-action/master?gitea_url=https%3A%2F%2Fcodeberg.org%2F&logo=codeberg&logoColor=white&label=updated)](https://codeberg.org/cssnr/check-build-action)
 [![GitHub Top Language](https://img.shields.io/github/languages/top/cssnr/check-build-action?logo=htmx)](https://github.com/cssnr/check-build-action)
 [![GitHub Forks](https://img.shields.io/github/forks/cssnr/check-build-action?style=flat&logo=github)](https://github.com/cssnr/check-build-action/forks)
 [![GitHub Repo Stars](https://img.shields.io/github/stars/cssnr/check-build-action?style=flat&logo=github)](https://github.com/cssnr/check-build-action/stargazers)

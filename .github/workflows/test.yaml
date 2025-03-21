@@ -4,7 +4,7 @@ on:
   pull_request:
   workflow_dispatch:
   schedule:
-    - cron: "18 18 * * 1,3,5"
+    - cron: "50 18 * * 1,3,5"
   push:
     branches: ["master"]
     paths:
@@ -31,10 +31,10 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v4
 
-      #- name: "Debug event.json"
-      #  continue-on-error: true
-      #  run: |
-      #    cat "${GITHUB_EVENT_PATH}"
+      - name: "Debug event.json"
+        continue-on-error: true
+        run: |
+          cat "${GITHUB_EVENT_PATH}"
 
       - name: "Install"
         run: |
