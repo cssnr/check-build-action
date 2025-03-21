@@ -38,7 +38,7 @@ All options are configurable.
 | :------ | :--: | :---------------------- | :-------------------------- |
 | build   |  -   | `npm run build`         | Build Command to Run \*     |
 | check   |  -   | `git diff --quiet dist` | Check Command to Run \*     |
-| path    |  -   | -                       | Patho to Verify Exist \*    |
+| path    |  -   | -                       | Path to Verify Exist \*     |
 | comment |  -   | `true`                  | Add Comment to PR \*        |
 | message |  -   | _see below_             | Message for Comment \*      |
 | mention |  -   | `true`                  | Mention Actor with @ \*     |
@@ -174,7 +174,7 @@ Breaking changes would result in a **Major** version bump. At a minimum you shou
 
 ### Planned
 
-- Wait for feature requests...
+- Wait for some [feature requests](https://github.com/cssnr/check-build-action/discussions/categories/feature-requests)...
 
 Want to automatically updated tags on release? Check out: [cssnr/update-version-tags-action](https://github.com/cssnr/update-version-tags-action)  
 Want to check outdated packages on a PR? Check out: [cssnr/npm-outdated-action](https://github.com/cssnr/npm-outdated-action)  
