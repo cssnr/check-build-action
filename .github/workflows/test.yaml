@@ -36,6 +36,13 @@ jobs:
       #  run: |
       #    cat "${GITHUB_EVENT_PATH}"
 
+      - name: "Install"
+        run: |
+          if [ ! -d "node_modules" ];then
+            echo "Running: npm ci"
+            npm ci
+          fi
+
       - name: "Test Local Action"
         id: test
         uses: ./
