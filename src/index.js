@@ -26,7 +26,7 @@ const { Pull } = require('./api')
         core.endGroup() // Config
 
         // Step 1 - Check for error
-        let error
+        let error = ''
         if (config.path && !fs.existsSync(config.path)) {
             console.log('Checking Path:', config.path)
             error = `Path not found: ${config.path}`
