@@ -1,8 +1,8 @@
-name: "Check Build Action"
-description: "Check Build Action"
+name: "Check Build"
+description: "Action to Check the Build build command was run and optionally comment on the PR."
 author: "Shane"
 branding:
-  icon: "type"
+  icon: "play-circle"
   color: "green"
 
 inputs:
@@ -46,5 +46,5 @@ outputs:
     description: "Error Message"
 
 runs:
-  using: "node20"
+  using: "node24"
   main: "dist/index.js"

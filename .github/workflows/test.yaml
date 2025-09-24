@@ -1,19 +1,19 @@
 name: "Test"
 
 on:
-  pull_request:
   workflow_dispatch:
   schedule:
-    - cron: "50 18 * * 1,3,5"
+    - cron: "18 18 * * 1,3,5"
   push:
     branches: ["master"]
     paths:
       - "dist/**"
       - "src/**"
-      - ".github/workflows/test.yaml"
       - "package*.json"
       - "requirements*.txt"
+      - ".github/workflows/test.yaml"
       - "action.yml"
+  pull_request:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -29,7 +29,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: "Debug event.json"
         continue-on-error: true
@@ -46,6 +46,8 @@ jobs:
       - name: "Test Local Action"
         id: test
         uses: ./
+        with:
+          path: "dist"
 
       - name: "Verify Outputs"
         env:

@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('node:fs')
 const core = require('@actions/core')
 const exec = require('@actions/exec')
 const github = require('@actions/github')
@@ -9,32 +9,32 @@ const { Pull } = require('./api')
     try {
         core.info(`🏳️ Starting Check Build Action`)
 
-        // // Debug
-        // core.startGroup('Debug: github.context')
-        // console.log(github.context)
-        // core.endGroup() // Debug github.context
-        // core.startGroup('Debug: process.env')
-        // console.log(process.env)
-        // core.endGroup() // Debug process.env
-        console.log('sender.login:', github.context.payload.sender?.login)
-        console.log('TRIGGERING_ACTOR:', process.env.GITHUB_TRIGGERING_ACTOR)
+        // Debug
+        core.startGroup('Debug: github.context')
+        console.log(github.context)
+        core.endGroup() // Debug github.context
+        core.startGroup('Debug: process.env')
+        console.log(process.env)
+        core.endGroup() // Debug process.env
 
-        // Get Config
-        const config = getConfig()
-        core.startGroup('Get Config')
-        console.log(config)
-        core.endGroup() // Config
+        // Get Inputs
+        const inputs = getInputs()
+        core.startGroup('Get Inputs')
+        console.log(inputs)
+        core.endGroup() // Inputs
 
         // Step 1 - Check for error
         let error = ''
-        if (config.path && !fs.existsSync(config.path)) {
-            console.log('Checking Path:', config.path)
-            error = `Path not found: ${config.path}`
+        if (inputs.path) {
+            console.log('Checking Path:', inputs.path)
+            if (!fs.existsSync(inputs.path)) {
+                error = `Path not found: ${inputs.path}`
+            }
         }
         try {
-            const build = await checkOutput(config.build)
+            const build = await checkOutput(inputs.build)
             console.log('build:', build)
-            const check = await checkOutput(config.check)
+            const check = await checkOutput(inputs.check)
             console.log('check:', check)
         } catch (e) {
             console.log('error:', e)
@@ -45,9 +45,9 @@ const { Pull } = require('./api')
 
         // Step 2 - Update comment IF pull_request
         let comment
-        if (config.comment && github.context.eventName === 'pull_request') {
+        if (inputs.comment && github.context.eventName === 'pull_request') {
             core.startGroup(`Processing PR: ${github.context.payload.number}`)
-            comment = await updatePull(config, error)
+            comment = await updatePull(inputs, error)
             core.endGroup() // Processing PR
         }
         console.log('comment:', comment)
@@ -58,10 +58,10 @@ const { Pull } = require('./api')
         core.setOutput('error', error.toString())
 
         // Summary
-        if (config.summary) {
+        if (inputs.summary) {
             core.info('📝 Writing Job Summary')
             try {
-                await addSummary(config, error, comment)
+                await addSummary(inputs, error, comment)
             } catch (e) {
                 console.log(e)
                 core.error(`Error writing Job Summary ${e.message}`)
@@ -83,11 +83,11 @@ const { Pull } = require('./api')
 
 /**
  * Update PR
- * @param {Config} config
+ * @param {Inputs} inputs
  * @param {*} error
  * @return {Promise<Object|undefined>}
  */
-async function updatePull(config, error) {
+async function updatePull(inputs, error) {
     if (!github.context.payload.pull_request?.number) {
         throw new Error('No Pull Request number!')
     }
@@ -100,7 +100,7 @@ async function updatePull(config, error) {
 
     // Step 2 - Get Current Comment
     const id = `<!-- check-build-action -->`
-    const pull = new Pull(github.context, config.token)
+    const pull = new Pull(github.context, inputs.token)
     let comment = await pull.getComment(id)
     console.log('comment:', comment)
 
@@ -114,13 +114,16 @@ async function updatePull(config, error) {
         }
     }
 
+    console.log('sender.login:', github.context.payload.sender?.login)
+    console.log('TRIGGERING_ACTOR:', process.env.GITHUB_TRIGGERING_ACTOR)
+    const actor =
+        github.context.payload.sender?.login || process.env.GITHUB_TRIGGERING_ACTOR
+
     // Step 4 - Add New Comment IF error
     if (error) {
         console.log('Adding New Comment')
-        const mention = config.mention
-            ? `@${github.context.payload.sender.login} - `
-            : ''
-        const body = `${id}\n${mention}${config.message}`
+        const mention = inputs.mention ? `@${actor} - ` : ''
+        const body = `${id}\n${mention}${inputs.message}`
         const response = await pull.createComment(body)
         // TODO: Add error handling
         console.log('response.status:', response.status)
@@ -141,6 +144,7 @@ async function checkOutput(command, options = {}) {
 
     let myOutput = ''
     let myError = ''
+    // noinspection JSUnusedGlobalSymbols
     options.listeners = {
         stdout: (data) => {
             myOutput += data.toString()
@@ -157,12 +161,12 @@ async function checkOutput(command, options = {}) {
 
 /**
  * Add Summary
- * @param {Config} config
+ * @param {Inputs} inputs
  * @param {String} error
  * @param {Object} comment
  * @return {Promise<void>}
  */
-async function addSummary(config, error, comment) {
+async function addSummary(inputs, error, comment) {
     core.summary.addRaw('## Check Build Action\n\n')
 
     if (comment) {
@@ -180,11 +184,11 @@ async function addSummary(config, error, comment) {
         core.summary.addRaw(`✅ Success\n\n---\n\n`)
     }
 
-    delete config.token
-    const yaml = Object.entries(config)
+    delete inputs.token
+    const yaml = Object.entries(inputs)
         .map(([k, v]) => `${k}: ${JSON.stringify(v)}`)
         .join('\n')
-    core.summary.addRaw('<details><summary>Config</summary>')
+    core.summary.addRaw('<details><summary>Inputs</summary>')
     core.summary.addCodeBlock(yaml, 'yaml')
     core.summary.addRaw('</details>\n')
 
@@ -195,8 +199,8 @@ async function addSummary(config, error, comment) {
 }
 
 /**
- * Get Config
- * @typedef {Object} Config
+ * Get Inputs
+ * @typedef {Object} Inputs
  * @property {String} build
  * @property {String} check
  * @property {String} [path]
@@ -205,9 +209,9 @@ async function addSummary(config, error, comment) {
  * @property {Boolean} mention
  * @property {Boolean} summary
  * @property {String} token
- * @return {Config}
+ * @return {Inputs}
  */
-function getConfig() {
+function getInputs() {
     return {
         build: core.getInput('build', { required: true }),
         check: core.getInput('check', { required: true }),
