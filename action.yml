@@ -45,7 +45,6 @@ outputs:
   error:
     description: "Error Message"
 
-# https://www.schemastore.org/github-action.json
 runs:
   using: "node24"
   main: "dist/index.js"

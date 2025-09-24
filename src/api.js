@@ -3,8 +3,8 @@ const github = require('@actions/github')
 class Pull {
     /**
      * Pull Request Manager
-     * @param {object} context
-     * @param {string} token
+     * @param {Object} context
+     * @param {String} token
      */
     constructor(context, token) {
         if (!context.payload.pull_request) {
@@ -17,7 +17,7 @@ class Pull {
 
     /**
      * Get Comment by startsWith
-     * TODO: Process additional pages, max per_page is 100
+     * NOTE: Process additional pages, max per_page is 100
      * @param {String} start
      * @return {Promise<Object|undefined>}
      */
@@ -28,7 +28,7 @@ class Pull {
                 issue_number: this.pull_request.number,
                 per_page: 100,
             })
-            // TODO: Add error handling
+            // NOTE: Add error handling
             console.log('comments.status:', comments.status)
             // console.log('comments.data:', comments.data)
             if (comments.data.length) {
@@ -44,8 +44,8 @@ class Pull {
 
     /**
      * Create Comment
-     * @param {string} body
-     * @return {Promise<object>}
+     * @param {String} body
+     * @return {Promise<Object>}
      */
     async createComment(body) {
         return await this.octokit.rest.issues.createComment({
@@ -57,8 +57,8 @@ class Pull {
 
     /**
      * Delete Comment
-     * @param {string} comment_id
-     * @return {Promise<object>}
+     * @param {String} comment_id
+     * @return {Promise<Object>}
      */
     async deleteComment(comment_id) {
         return await this.octokit.rest.issues.deleteComment({
@@ -69,10 +69,11 @@ class Pull {
 
     /**
      * Update Comment
-     * @param {string} comment_id
-     * @param {string} body
-     * @return {Promise<object>}
+     * @param {String} comment_id
+     * @param {String} body
+     * @return {Promise<Object>}
      */
+    // noinspection JSUnusedGlobalSymbols
     async updateComment(comment_id, body) {
         return await this.octokit.rest.issues.updateComment({
             ...this.repo,
