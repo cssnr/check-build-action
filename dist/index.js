@@ -31367,9 +31367,11 @@ function requireSrc () {
 
 	        // Step 1 - Check for error
 	        let error = '';
-	        if (inputs.path && !fs.existsSync(inputs.path)) {
+	        if (inputs.path) {
 	            console.log('Checking Path:', inputs.path);
-	            error = `Path not found: ${inputs.path}`;
+	            if (!fs.existsSync(inputs.path)) {
+	                error = `Path not found: ${inputs.path}`;
+	            }
 	        }
 	        try {
 	            const build = await checkOutput(inputs.build);
