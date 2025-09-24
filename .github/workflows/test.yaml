@@ -46,6 +46,8 @@ jobs:
       - name: "Test Local Action"
         id: test
         uses: ./
+        with:
+          path: "dist"
 
       - name: "Verify Outputs"
         env:

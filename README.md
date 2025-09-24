@@ -35,7 +35,7 @@ All [options](#inputs) are configurable.
 
 ```yaml
 - name: 'Check Build Action'
-  uses: cssnr/check-build-action@master
+  uses: cssnr/check-build-action@v1
 ```
 
 ## Features
@@ -97,7 +97,7 @@ Coming Soon...
 
 ```yaml
 - name: 'Check Build Action'
-  uses: cssnr/check-build-action@master
+  uses: cssnr/check-build-action@v1
 ```
 
 ### Permissions
@@ -123,7 +123,7 @@ This outputs the changes `json` object and the `markdown` table.
 ```yaml
 - name: 'Check Build Action'
   id: outdated
-  uses: cssnr/check-build-action@master
+  uses: cssnr/check-build-action@v1
 
 - name: 'Echo Output'
   env:
@@ -145,7 +145,7 @@ More Output Examples Coming Soon...
 
 ```yaml
 - name: 'Check Build Action'
-  uses: cssnr/check-build-action@master
+  uses: cssnr/check-build-action@v1
   with:
     build: 'npm run build'
     check: 'git diff --quiet dist'
@@ -156,7 +156,7 @@ More Output Examples Coming Soon...
 
 ```yaml
 - name: 'Check Build Action'
-  uses: cssnr/check-build-action@master
+  uses: cssnr/check-build-action@v1
   with:
     build: 'npm run build'
     check: 'git diff --quiet dist'
