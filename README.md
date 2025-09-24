@@ -29,6 +29,7 @@
 - [Contributing](#Contributing)
 
 Action to Check if the provided Build command was run and Optionally Comment on the PR.
+
 This is useful for things like GitHub Actions which require a built distribution.
 It will verify the build command has been run, and optionally comment on the PR with build instructions.
 
@@ -167,7 +168,7 @@ More Output Examples Coming Soon...
 </details>
 
 For more examples, you can check out other projects using this action:  
-https://github.com/cssnr/upload-release-action/network/dependents
+https://github.com/cssnr/check-build-action/network/dependents
 
 Want to automatically updated tags on release? Check out: [cssnr/update-version-tags-action](https://github.com/cssnr/update-version-tags-action)  
 Want to show package changes on release notes? Check out: [cssnr/package-changelog-action](https://github.com/cssnr/package-changelog-action)  
