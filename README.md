@@ -28,9 +28,7 @@
 - [Support](#Support)
 - [Contributing](#Contributing)
 
-This action is designed to check if a build has been run. It works on any event.
-
-On a pull_request it will add a comment with a message mentioning the user.
+Action to Check if the provided Build command was run and Optionally Comment on the PR.
 
 All [options](#inputs) are configurable.
 
