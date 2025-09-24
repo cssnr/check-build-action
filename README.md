@@ -8,21 +8,23 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=cssnr_check-build-action&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=cssnr_check-build-action)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/cssnr/check-build-action?logo=github&label=updated)](https://github.com/cssnr/check-build-action/graphs/commit-activity)
 [![Codeberg Last Commit](https://img.shields.io/gitea/last-commit/cssnr/check-build-action/master?gitea_url=https%3A%2F%2Fcodeberg.org%2F&logo=codeberg&logoColor=white&label=updated)](https://codeberg.org/cssnr/check-build-action)
+[![GitHub Contributors](https://img.shields.io/github/contributors/cssnr/check-build-action?logo=github)](https://github.com/cssnr/check-build-action/graphs/contributors)
 [![GitHub Top Language](https://img.shields.io/github/languages/top/cssnr/check-build-action?logo=htmx)](https://github.com/cssnr/check-build-action)
 [![GitHub Forks](https://img.shields.io/github/forks/cssnr/check-build-action?style=flat&logo=github)](https://github.com/cssnr/check-build-action/forks)
 [![GitHub Repo Stars](https://img.shields.io/github/stars/cssnr/check-build-action?style=flat&logo=github)](https://github.com/cssnr/check-build-action/stargazers)
 [![GitHub Org Stars](https://img.shields.io/github/stars/cssnr?style=flat&logo=github&label=org%20stars)](https://cssnr.github.io/)
 [![Discord](https://img.shields.io/discord/899171661457293343?logo=discord&logoColor=white&label=discord&color=7289da)](https://discord.gg/wXy6m2X8wY)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-72a5f2?logo=kofi&label=support)](https://ko-fi.com/cssnr)
 
 # Check Build Action
 
+- [Features](#Features)
+  - [Planned](#Planned)
 - [Inputs](#Inputs)
   - [Permissions](#Permissions)
 - [Outputs](#Outputs)
 - [Examples](#Examples)
 - [Tags](#Tags)
-- [Features](#Features)
-  - [Planned](#Planned)
 - [Support](#Support)
 - [Contributing](#Contributing)
 
@@ -30,20 +32,41 @@ This action is designed to check if a build has been run. It works on any event.
 
 On a pull_request it will add a comment with a message mentioning the user.
 
-All options are configurable.
+All [options](#inputs) are configurable.
+
+```yaml
+- name: 'Check Build Action'
+  uses: cssnr/check-build-action@master
+```
+
+## Features
+
+- Custom build command
+- Custom check command
+- Optional path to verify
+- Option to comment on PRs
+- Option to customize message and mention
+
+### Planned
+
+- Wait for some [feature requests](https://github.com/cssnr/check-build-action/discussions/categories/feature-requests)...
+
+Want to automatically updated tags on release? Check out: [cssnr/update-version-tags-action](https://github.com/cssnr/update-version-tags-action)  
+Want to check outdated packages on a PR? Check out: [cssnr/npm-outdated-action](https://github.com/cssnr/npm-outdated-action)  
+Want to show package changes on release notes? Check out: [cssnr/package-changelog-action](https://github.com/cssnr/package-changelog-action)
 
 ## Inputs
 
-| Input   | Req. | Default&nbsp;Value      | Input&nbsp;Description      |
-| :------ | :--: | :---------------------- | :-------------------------- |
-| build   |  -   | `npm run build`         | Build Command to Run \*     |
-| check   |  -   | `git diff --quiet dist` | Check Command to Run \*     |
-| path    |  -   | -                       | Path to Verify Exist \*     |
-| comment |  -   | `true`                  | Add Comment to PR \*        |
-| message |  -   | _see below_             | Message for Comment \*      |
-| mention |  -   | `true`                  | Mention Actor with @ \*     |
-| summary |  -   | `true`                  | Add Workflow Job Summary \* |
-| token   |  -   | `github.token`          | For use with a PAT          |
+|  Input  | Default&nbsp;Value      | Description&nbsp;of&nbsp;Input |
+| :-----: | :---------------------- | :----------------------------- |
+|  build  | `npm run build`         | Build Command to Run \*        |
+|  check  | `git diff --quiet dist` | Check Command to Run \*        |
+|  path   | -                       | Path to Verify Exist \*        |
+| comment | `true`                  | Add Comment to PR \*           |
+| message | _see below_             | Message for Comment \*         |
+| mention | `true`                  | Mention Actor with @ \*        |
+| summary | `true`                  | Add Workflow Job Summary \*    |
+|  token  | `${{ github.token }}`   | GitHub Access Token PAT [^1]   |
 
 **build:** Build or prepare command to run before checking if build was run.
 
@@ -164,22 +187,6 @@ You can view the release notes for each version on the [releases](https://github
 The **Major** tag is recommended. It is the most up-to-date and always backwards compatible.
 Breaking changes would result in a **Major** version bump. At a minimum you should use a **Minor** tag.
 
-## Features
-
-- Custom build command
-- Custom check command
-- Optional path to verify
-- Option to comment on PRs
-- Option to customize message and mention
-
-### Planned
-
-- Wait for some [feature requests](https://github.com/cssnr/check-build-action/discussions/categories/feature-requests)...
-
-Want to automatically updated tags on release? Check out: [cssnr/update-version-tags-action](https://github.com/cssnr/update-version-tags-action)  
-Want to check outdated packages on a PR? Check out: [cssnr/npm-outdated-action](https://github.com/cssnr/npm-outdated-action)  
-Want to show package changes on release notes? Check out: [cssnr/package-changelog-action](https://github.com/cssnr/package-changelog-action)
-
 # Support
 
 For general help or to request a feature, see:
@@ -197,9 +204,12 @@ For more information, see the CSSNR [SUPPORT.md](https://github.com/cssnr/.githu
 
 # Contributing
 
-Currently, the best way to contribute to this project is to star this project on GitHub.
+Please consider making a donation to support the development of this project
+and [additional](https://cssnr.com/) open source projects.
 
-For more information, see the CSSNR [CONTRIBUTING.md](https://github.com/cssnr/.github/blob/master/.github/CONTRIBUTING.md#contributing).
+[![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/cssnr)
+
+If you would like to submit a PR, please review the [CONTRIBUTING.md](#contributing-ov-file).
 
 Additionally, you can support other GitHub Actions I have published:
 
@@ -215,5 +225,13 @@ Additionally, you can support other GitHub Actions I have published:
 - [Docker Tags Action](https://github.com/cssnr/docker-tags-action?tab=readme-ov-file#readme)
 - [Package Changelog Action](https://github.com/cssnr/package-changelog-action?tab=readme-ov-file#readme)
 - [NPM Outdated Check Action](https://github.com/cssnr/npm-outdated-action?tab=readme-ov-file#readme)
+- [Label Creator Action](https://github.com/cssnr/label-creator-action?tab=readme-ov-file#readme)
+- [Algolia Crawler Action](https://github.com/cssnr/algolia-crawler-action?tab=readme-ov-file#readme)
+- [Upload Release Action](https://github.com/cssnr/upload-release-action?tab=readme-ov-file#readme)
 
-For a full list of current projects to support visit: [https://cssnr.github.io/](https://cssnr.github.io/)
+For a full list of current projects visit: [https://cssnr.github.io/](https://cssnr.github.io/)
+
+[^1]:
+
+The `${{ github.token }}` / `{{ secrets.GITHUB_TOKEN }}` is automatically passed, there is no need to manually pass these!
+This is only available to allow users to pass a different token they have created and defined in their `secrets`.
