@@ -12,6 +12,7 @@
 [![GitHub Repo Size](https://img.shields.io/github/repo-size/cssnr/check-build-action?logo=bookstack&logoColor=white&label=repo%20size)](https://github.com/cssnr/check-build-action?tab=readme-ov-file#readme)
 [![GitHub Top Language](https://img.shields.io/github/languages/top/cssnr/check-build-action?logo=htmx)](https://github.com/cssnr/check-build-action)
 [![GitHub Forks](https://img.shields.io/github/forks/cssnr/check-build-action?style=flat&logo=github)](https://github.com/cssnr/check-build-action/forks)
+[![GitHub Discussions](https://img.shields.io/github/discussions/cssnr/check-build-action?logo=github)](https://github.com/cssnr/check-build-action/discussions)
 [![GitHub Repo Stars](https://img.shields.io/github/stars/cssnr/check-build-action?style=flat&logo=github)](https://github.com/cssnr/check-build-action/stargazers)
 [![GitHub Org Stars](https://img.shields.io/github/stars/cssnr?style=flat&logo=github&label=org%20stars)](https://cssnr.github.io/)
 [![Discord](https://img.shields.io/discord/899171661457293343?logo=discord&logoColor=white&label=discord&color=7289da)](https://discord.gg/wXy6m2X8wY)
