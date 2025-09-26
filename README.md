@@ -55,16 +55,16 @@ _All [inputs](#inputs) are optional._
 
 ## Inputs
 
-|  Input  | Default&nbsp;Value      | Description&nbsp;of&nbsp;Input |
-| :-----: | :---------------------- | :----------------------------- |
-|  build  | `npm run build`         | Build Command to Run \*        |
-|  check  | `git diff --quiet dist` | Check Command to Run \*        |
-|  path   | -                       | Path to Verify Exist \*        |
+| Input   | Default&nbsp;Value      | Description&nbsp;of&nbsp;Input |
+| :------ | :---------------------- | :----------------------------- |
+| build   | `npm run build`         | Build Command to Run \*        |
+| check   | `git diff --quiet dist` | Check Command to Run \*        |
+| path    | -                       | Path to Verify Exist \*        |
 | comment | `true`                  | Add Comment to PR \*           |
 | message | _see below_             | Message for Comment \*         |
 | mention | `true`                  | Mention Actor with @ \*        |
 | summary | `true`                  | Add Workflow Job Summary \*    |
-|  token  | `${{ github.token }}`   | GitHub Access Token PAT [^1]   |
+| token   | `${{ github.token }}`   | GitHub Access Token PAT [^1]   |
 
 **build:** Build or prepare command to run before checking if build was run.
 
