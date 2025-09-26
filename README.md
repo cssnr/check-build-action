@@ -12,6 +12,7 @@
 [![GitHub Repo Size](https://img.shields.io/github/repo-size/cssnr/check-build-action?logo=bookstack&logoColor=white&label=repo%20size)](https://github.com/cssnr/check-build-action?tab=readme-ov-file#readme)
 [![GitHub Top Language](https://img.shields.io/github/languages/top/cssnr/check-build-action?logo=htmx)](https://github.com/cssnr/check-build-action)
 [![GitHub Forks](https://img.shields.io/github/forks/cssnr/check-build-action?style=flat&logo=github)](https://github.com/cssnr/check-build-action/forks)
+[![GitHub Discussions](https://img.shields.io/github/discussions/cssnr/check-build-action?logo=github)](https://github.com/cssnr/check-build-action/discussions)
 [![GitHub Repo Stars](https://img.shields.io/github/stars/cssnr/check-build-action?style=flat&logo=github)](https://github.com/cssnr/check-build-action/stargazers)
 [![GitHub Org Stars](https://img.shields.io/github/stars/cssnr?style=flat&logo=github&label=org%20stars)](https://cssnr.github.io/)
 [![Discord](https://img.shields.io/discord/899171661457293343?logo=discord&logoColor=white&label=discord&color=7289da)](https://discord.gg/wXy6m2X8wY)
@@ -54,16 +55,16 @@ _All [inputs](#inputs) are optional._
 
 ## Inputs
 
-|  Input  | Default&nbsp;Value      | Description&nbsp;of&nbsp;Input |
-| :-----: | :---------------------- | :----------------------------- |
-|  build  | `npm run build`         | Build Command to Run \*        |
-|  check  | `git diff --quiet dist` | Check Command to Run \*        |
-|  path   | -                       | Path to Verify Exist \*        |
+| Input   | Default&nbsp;Value      | Description&nbsp;of&nbsp;Input |
+| :------ | :---------------------- | :----------------------------- |
+| build   | `npm run build`         | Build Command to Run \*        |
+| check   | `git diff --quiet dist` | Check Command to Run \*        |
+| path    | -                       | Path to Verify Exist \*        |
 | comment | `true`                  | Add Comment to PR \*           |
 | message | _see below_             | Message for Comment \*         |
 | mention | `true`                  | Mention Actor with @ \*        |
 | summary | `true`                  | Add Workflow Job Summary \*    |
-|  token  | `${{ github.token }}`   | GitHub Access Token PAT [^1]   |
+| token   | `${{ github.token }}`   | GitHub Access Token PAT [^1]   |
 
 **build:** Build or prepare command to run before checking if build was run.
 
@@ -230,10 +231,45 @@ Additionally, you can support other GitHub Actions I have published:
 - [Label Creator Action](https://github.com/cssnr/label-creator-action?tab=readme-ov-file#readme)
 - [Algolia Crawler Action](https://github.com/cssnr/algolia-crawler-action?tab=readme-ov-file#readme)
 - [Upload Release Action](https://github.com/cssnr/upload-release-action?tab=readme-ov-file#readme)
+- [Check Build Action](https://github.com/cssnr/check-build-action?tab=readme-ov-file#readme)
+- [Web Request Action](https://github.com/cssnr/web-request-action?tab=readme-ov-file#readme)
+
+<details><summary>❔ Unpublished Actions</summary>
+
+These actions are not published on the Marketplace, but may be useful.
+
+Generic Actions:
+
+- [cssnr/draft-release-action](https://github.com/cssnr/draft-release-action) - Keep a draft release ready to publish.
+- [cssnr/env-json-action](https://github.com/cssnr/env-json-action) - Convert env file to json or vice versa.
+- [cssnr/get-commit-action](https://github.com/cssnr/get-commit-action) - Get the current commit with full details.
+
+Specific Actions:
+
+- [cssnr/push-artifacts-action](https://github.com/cssnr/push-artifacts-action) - Sync's artifacts to a remote host.
+- [smashedr/update-release-notes-action](https://github.com/smashedr/update-release-notes-action) - Update release notes.
+
+---
+
+</details>
+
+<details><summary>📝 Template Actions</summary>
+
+These are basic action templates that I use for creating new actions.
+
+- [js-test-action](https://github.com/smashedr/js-test-action?tab=readme-ov-file#readme) - JavaScript
+- [py-test-action](https://github.com/smashedr/py-test-action?tab=readme-ov-file#readme) - Python
+- [ts-test-action](https://github.com/smashedr/ts-test-action?tab=readme-ov-file#readme) - TypeScript
+- [docker-test-action](https://github.com/smashedr/docker-test-action?tab=readme-ov-file#readme) - Docker Image
+
+Note: The `docker-test-action` builds, runs and pushes images to [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry).
+
+---
+
+</details>
 
 For a full list of current projects visit: [https://cssnr.github.io/](https://cssnr.github.io/)
 
 [^1]:
-
-The `${{ github.token }}` / `{{ secrets.GITHUB_TOKEN }}` is automatically passed, there is no need to manually pass these!
-This is only available to allow users to pass a different token they have created and defined in their `secrets`.
+    The `${{ github.token }}` / `{{ secrets.GITHUB_TOKEN }}` is automatically passed, there is no need to manually pass these!
+    This is only available to allow users to pass a different token they have created and defined in their `secrets`.
