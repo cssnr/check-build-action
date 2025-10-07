@@ -64,7 +64,7 @@ _All [inputs](#inputs) are optional._
 | [message](#message) | _see below_             | Message for Comment                       |
 | [mention](#mention) | `true`                  | Mention Actor with @                      |
 | [summary](#summary) | `true`                  | Add Workflow Job Summary                  |
-| `token`             | `${{ github.token }}`   | GitHub Access Token PAT [^1]              |
+| `token`             | `${{ github.token }}`   | Only for PAT Use [^1]                     |
 
 ### build
 
