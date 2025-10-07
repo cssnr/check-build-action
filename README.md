@@ -4,15 +4,15 @@
 [![GitHub Dist Size](https://img.shields.io/github/size/cssnr/check-build-action/dist%2Findex.js?logo=bookstack&logoColor=white&label=dist%20size)](https://github.com/cssnr/check-build-action/blob/master/src)
 [![Workflow Release](https://img.shields.io/github/actions/workflow/status/cssnr/check-build-action/release.yaml?logo=cachet&label=release)](https://github.com/cssnr/check-build-action/actions/workflows/release.yaml)
 [![Workflow Test](https://img.shields.io/github/actions/workflow/status/cssnr/check-build-action/test.yaml?logo=cachet&label=test)](https://github.com/cssnr/check-build-action/actions/workflows/test.yaml)
-[![Workflow lint](https://img.shields.io/github/actions/workflow/status/cssnr/check-build-action/lint.yaml?logo=cachet&label=lint)](https://github.com/cssnr/check-build-action/actions/workflows/lint.yaml)
+[![Workflow Lint](https://img.shields.io/github/actions/workflow/status/cssnr/check-build-action/lint.yaml?logo=cachet&label=lint)](https://github.com/cssnr/check-build-action/actions/workflows/lint.yaml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=cssnr_check-build-action&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=cssnr_check-build-action)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/cssnr/check-build-action?logo=github&label=updated)](https://github.com/cssnr/check-build-action/pulse)
 [![Codeberg Last Commit](https://img.shields.io/gitea/last-commit/cssnr/check-build-action/master?gitea_url=https%3A%2F%2Fcodeberg.org%2F&logo=codeberg&logoColor=white&label=updated)](https://codeberg.org/cssnr/check-build-action)
-[![GitHub Contributors](https://img.shields.io/github/contributors/cssnr/check-build-action?logo=github)](https://github.com/cssnr/check-build-action/graphs/contributors)
+[![GitHub Contributors](https://img.shields.io/github/contributors-anon/cssnr/check-build-action?logo=github)](https://github.com/cssnr/check-build-action/graphs/contributors)
 [![GitHub Repo Size](https://img.shields.io/github/repo-size/cssnr/check-build-action?logo=bookstack&logoColor=white&label=repo%20size)](https://github.com/cssnr/check-build-action?tab=readme-ov-file#readme)
 [![GitHub Top Language](https://img.shields.io/github/languages/top/cssnr/check-build-action?logo=htmx)](https://github.com/cssnr/check-build-action)
-[![GitHub Forks](https://img.shields.io/github/forks/cssnr/check-build-action?style=flat&logo=github)](https://github.com/cssnr/check-build-action/forks)
 [![GitHub Discussions](https://img.shields.io/github/discussions/cssnr/check-build-action?logo=github)](https://github.com/cssnr/check-build-action/discussions)
+[![GitHub Forks](https://img.shields.io/github/forks/cssnr/check-build-action?style=flat&logo=github)](https://github.com/cssnr/check-build-action/forks)
 [![GitHub Repo Stars](https://img.shields.io/github/stars/cssnr/check-build-action?style=flat&logo=github)](https://github.com/cssnr/check-build-action/stargazers)
 [![GitHub Org Stars](https://img.shields.io/github/stars/cssnr?style=flat&logo=github&label=org%20stars)](https://cssnr.github.io/)
 [![Discord](https://img.shields.io/discord/899171661457293343?logo=discord&logoColor=white&label=discord&color=7289da)](https://discord.gg/wXy6m2X8wY)
@@ -55,34 +55,48 @@ _All [inputs](#inputs) are optional._
 
 ## Inputs
 
-| Input   | Default&nbsp;Value      | Description&nbsp;of&nbsp;Input |
-| :------ | :---------------------- | :----------------------------- |
-| build   | `npm run build`         | Build Command to Run \*        |
-| check   | `git diff --quiet dist` | Check Command to Run \*        |
-| path    | -                       | Path to Verify Exist \*        |
-| comment | `true`                  | Add Comment to PR \*           |
-| message | _see below_             | Message for Comment \*         |
-| mention | `true`                  | Mention Actor with @ \*        |
-| summary | `true`                  | Add Workflow Job Summary \*    |
-| token   | `${{ github.token }}`   | GitHub Access Token PAT [^1]   |
+| Input               | Default&nbsp;Value      | Description&nbsp;of&nbsp;Input&nbsp;Value |
+| :------------------ | :---------------------- | :---------------------------------------- |
+| [build](#build)     | `npm run build`         | Build Command to Run                      |
+| [check](#check)     | `git diff --quiet dist` | Check Command to Run                      |
+| [path](#path)       | -                       | Path to Verify Exist                      |
+| [comment](#comment) | `true`                  | Add Comment to PR                         |
+| [message](#message) | _see below_             | Message for Comment                       |
+| [mention](#mention) | `true`                  | Mention Actor with @                      |
+| [summary](#summary) | `true`                  | Add Workflow Job Summary                  |
+| `token`             | `${{ github.token }}`   | GitHub Access Token PAT [^1]              |
 
-**build:** Build or prepare command to run before checking if build was run.
+### build
 
-**check:** Check command to run to verify build was run. This should exit with error on failure.
+Build or prepare command to run before checking if build was run.
 
-**path:** A path to verify exists, otherwise will fail.
+### check
 
-**comment:** Add a comment to the pull request.
+Check command to run to verify build was run. This should exit with error on failure.
 
-**message:** Message to put in comment. Default:
+### path
+
+A path to verify exists, otherwise will fail.
+
+### comment
+
+Add a comment to the pull request.
+
+### message
+
+Message to put in comment. Default:
 
 ```shell
 Run: `run npm build`
 ```
 
-**mention:** Will mention the actor in the comment with `@user`.
+### mention
 
-**summary:** Will add result details to the job summary on the workflow run.
+Will mention the actor in the comment with `@user`.
+
+### summary
+
+Will add result details to the job summary on the workflow run.
 
 <details><summary>👀 View Example Job Summary</summary>
 
@@ -201,7 +215,7 @@ If you are experiencing an issue/bug or getting unexpected results, you can:
 
 - Report an Issue: https://github.com/cssnr/check-build-action/issues
 - Chat with us on Discord: https://discord.gg/wXy6m2X8wY
-- Provide General Feedback: [https://cssnr.github.io/feedback/](https://cssnr.github.io/feedback/?app=Update%20Release%20Notes)
+- Provide General Feedback: [https://cssnr.github.io/feedback/](https://cssnr.github.io/feedback/?app=Check%20Build%20Action)
 
 For more information, see the CSSNR [SUPPORT.md](https://github.com/cssnr/.github/blob/master/.github/SUPPORT.md#support).
 
@@ -217,15 +231,17 @@ If you would like to submit a PR, please review the [CONTRIBUTING.md](#contribut
 Additionally, you can support other GitHub Actions I have published:
 
 - [Stack Deploy Action](https://github.com/cssnr/stack-deploy-action?tab=readme-ov-file#readme)
-- [Portainer Stack Deploy](https://github.com/cssnr/portainer-stack-deploy-action?tab=readme-ov-file#readme)
+- [Portainer Stack Deploy Action](https://github.com/cssnr/portainer-stack-deploy-action?tab=readme-ov-file#readme)
+- [Docker Context Action](https://github.com/cssnr/docker-context-action?tab=readme-ov-file#readme)
 - [VirusTotal Action](https://github.com/cssnr/virustotal-action?tab=readme-ov-file#readme)
 - [Mirror Repository Action](https://github.com/cssnr/mirror-repository-action?tab=readme-ov-file#readme)
 - [Update Version Tags Action](https://github.com/cssnr/update-version-tags-action?tab=readme-ov-file#readme)
+- [Docker Tags Action](https://github.com/cssnr/docker-tags-action?tab=readme-ov-file#readme)
 - [Update JSON Value Action](https://github.com/cssnr/update-json-value-action?tab=readme-ov-file#readme)
+- [JSON Key Value Check Action](https://github.com/cssnr/json-key-value-check-action?tab=readme-ov-file#readme)
 - [Parse Issue Form Action](https://github.com/cssnr/parse-issue-form-action?tab=readme-ov-file#readme)
 - [Cloudflare Purge Cache Action](https://github.com/cssnr/cloudflare-purge-cache-action?tab=readme-ov-file#readme)
 - [Mozilla Addon Update Action](https://github.com/cssnr/mozilla-addon-update-action?tab=readme-ov-file#readme)
-- [Docker Tags Action](https://github.com/cssnr/docker-tags-action?tab=readme-ov-file#readme)
 - [Package Changelog Action](https://github.com/cssnr/package-changelog-action?tab=readme-ov-file#readme)
 - [NPM Outdated Check Action](https://github.com/cssnr/npm-outdated-action?tab=readme-ov-file#readme)
 - [Label Creator Action](https://github.com/cssnr/label-creator-action?tab=readme-ov-file#readme)
@@ -233,21 +249,17 @@ Additionally, you can support other GitHub Actions I have published:
 - [Upload Release Action](https://github.com/cssnr/upload-release-action?tab=readme-ov-file#readme)
 - [Check Build Action](https://github.com/cssnr/check-build-action?tab=readme-ov-file#readme)
 - [Web Request Action](https://github.com/cssnr/web-request-action?tab=readme-ov-file#readme)
+- [Get Commit Action](https://github.com/cssnr/get-commit-action?tab=readme-ov-file#readme)
 
 <details><summary>❔ Unpublished Actions</summary>
 
 These actions are not published on the Marketplace, but may be useful.
 
-Generic Actions:
-
-- [cssnr/draft-release-action](https://github.com/cssnr/draft-release-action) - Keep a draft release ready to publish.
-- [cssnr/env-json-action](https://github.com/cssnr/env-json-action) - Convert env file to json or vice versa.
-- [cssnr/get-commit-action](https://github.com/cssnr/get-commit-action) - Get the current commit with full details.
-
-Specific Actions:
-
-- [cssnr/push-artifacts-action](https://github.com/cssnr/push-artifacts-action) - Sync's artifacts to a remote host.
-- [smashedr/update-release-notes-action](https://github.com/smashedr/update-release-notes-action) - Update release notes.
+- [cssnr/draft-release-action](https://github.com/cssnr/draft-release-action?tab=readme-ov-file#readme) - Keep a draft release ready to publish.
+- [cssnr/env-json-action](https://github.com/cssnr/env-json-action?tab=readme-ov-file#readme) - Convert env file to json or vice versa.
+- [cssnr/push-artifacts-action](https://github.com/cssnr/push-artifacts-action?tab=readme-ov-file#readme) - Sync files to a remote host with rsync.
+- [smashedr/update-release-notes-action](https://github.com/smashedr/update-release-notes-action?tab=readme-ov-file#readme) - Update release notes.
+- [smashedr/combine-release-notes-action](https://github.com/smashedr/combine-release-notes-action?tab=readme-ov-file#readme) - Combine release notes.
 
 ---
 
