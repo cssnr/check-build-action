@@ -45,7 +45,8 @@ const { Pull } = require('./api')
 
         // Step 2 - Update comment IF pull_request
         let comment
-        if (inputs.comment && github.context.eventName === 'pull_request') {
+        const events = ['pull_request', 'pull_request_target']
+        if (inputs.comment && events.includes(github.context.eventName)) {
             core.startGroup(`Processing PR: ${github.context.payload.number}`)
             comment = await updatePull(inputs, error)
             core.endGroup() // Processing PR
