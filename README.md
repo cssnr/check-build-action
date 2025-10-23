@@ -182,6 +182,8 @@ More Output Examples Coming Soon...
 
 </details>
 
+For a `pull_request_target` example, see: [check-build.yaml](https://github.com/cssnr/check-build-action/blob/master/.github/workflows/check-build.yaml)
+
 For more examples, you can check out other projects using this action:  
 https://github.com/cssnr/check-build-action/network/dependents
 
@@ -221,12 +223,12 @@ For more information, see the CSSNR [SUPPORT.md](https://github.com/cssnr/.githu
 
 # Contributing
 
+If you would like to submit a PR, please review the [CONTRIBUTING.md](#contributing-ov-file).
+
 Please consider making a donation to support the development of this project
 and [additional](https://cssnr.com/) open source projects.
 
 [![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/cssnr)
-
-If you would like to submit a PR, please review the [CONTRIBUTING.md](#contributing-ov-file).
 
 Additionally, you can support other GitHub Actions I have published:
 
@@ -280,7 +282,7 @@ Note: The `docker-test-action` builds, runs and pushes images to [GitHub Contain
 
 </details>
 
-For a full list of current projects visit: [https://cssnr.github.io/](https://cssnr.github.io/)
+For a full list of current projects to support visit: [https://cssnr.github.io/](https://cssnr.github.io/)
 
 [^1]:
     The `${{ github.token }}` / `{{ secrets.GITHUB_TOKEN }}` is automatically passed, there is no need to manually pass these!

@@ -49,6 +49,7 @@ jobs:
         uses: ./
         with:
           path: "dist"
+          comment: false
 
       - name: "Verify Outputs"
         env:
