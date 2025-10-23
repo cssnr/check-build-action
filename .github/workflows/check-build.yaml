@@ -47,4 +47,4 @@ jobs:
 
       - name: "Check Build Action"
         if: ${{ !cancelled() }}
-        uses: cssnr/check-build-action@target
+        uses: cssnr/check-build-action@master
