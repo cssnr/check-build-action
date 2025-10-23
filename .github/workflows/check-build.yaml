@@ -20,7 +20,7 @@ jobs:
           GITHUB_CTX: ${{ toJSON(github) }}
         run: echo "$GITHUB_CTX"
 
-      - name: Get all changed markdown files
+      - name: "Check Changed Files"
         id: changed
         uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62 # v47
         with:
@@ -28,7 +28,7 @@ jobs:
             dist/**
             src/**
             package*.json
-            rollup.config.mjs
+            rollup.config.*
 
       - name: "Checkout Pull"
         if: ${{ steps.changed.outputs.any_changed == 'true' }}
