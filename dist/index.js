@@ -31379,6 +31379,7 @@ function requireSrc () {
 
 	        // Run Install
 	        if (inputs.install) {
+	            console.log('Running Install:', inputs.install);
 	            const install = await checkOutput(inputs.install);
 	            console.log('install:', install);
 	        }
