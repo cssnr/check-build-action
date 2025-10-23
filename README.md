@@ -57,6 +57,7 @@ _All [inputs](#inputs) are optional._
 
 | Input               | Default&nbsp;Value      | Description&nbsp;of&nbsp;Input&nbsp;Value |
 | :------------------ | :---------------------- | :---------------------------------------- |
+| [install](#install) | `npm ci`                | Install Command to Run                    |
 | [build](#build)     | `npm run build`         | Build Command to Run                      |
 | [check](#check)     | `git diff --quiet dist` | Check Command to Run                      |
 | [path](#path)       | -                       | Path to Verify Exist                      |
@@ -65,6 +66,10 @@ _All [inputs](#inputs) are optional._
 | [mention](#mention) | `true`                  | Mention Actor with @                      |
 | [summary](#summary) | `true`                  | Add Workflow Job Summary                  |
 | `token`             | `${{ github.token }}`   | Only for PAT Use [^1]                     |
+
+### install
+
+Install command to run, optional. Set empty `install: ""` to disable.
 
 ### build
 
