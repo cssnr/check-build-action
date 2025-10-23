@@ -182,6 +182,8 @@ More Output Examples Coming Soon...
 
 </details>
 
+For a `pull_request_target` example, see: [check-build.yaml](https://github.com/cssnr/check-build-action/blob/master/.github/workflows/check-build.yaml)
+
 For more examples, you can check out other projects using this action:  
 https://github.com/cssnr/check-build-action/network/dependents
 
