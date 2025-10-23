@@ -20,12 +20,24 @@ jobs:
           GITHUB_CTX: ${{ toJSON(github) }}
         run: echo "$GITHUB_CTX"
 
+      - name: "Check Changed Files"
+        id: changed
+        uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62 # v47
+        with:
+          files: |
+            dist/**
+            src/**
+            package*.json
+            rollup.config.*
+
       - name: "Checkout Pull"
+        if: ${{ steps.changed.outputs.any_changed == 'true' }}
         uses: actions/checkout@v5
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: "Debug"
+        if: ${{ steps.changed.outputs.any_changed == 'true' }}
         continue-on-error: true
         run: |
           echo "::group::ls"
@@ -36,15 +48,17 @@ jobs:
           echo "::endgroup::"
 
       - name: "Setup Node"
+        if: ${{ steps.changed.outputs.any_changed == 'true' }}
         uses: actions/setup-node@v6
         with:
           node-version: 24
 
       - name: "Install"
+        if: ${{ steps.changed.outputs.any_changed == 'true' }}
         id: install
         run: |
           npm ci
 
       - name: "Check Build Action"
-        if: ${{ !cancelled() }}
+        if: ${{ steps.changed.outputs.any_changed == 'true' }}
         uses: cssnr/check-build-action@master
