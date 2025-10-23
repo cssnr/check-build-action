@@ -31377,6 +31377,12 @@ function requireSrc () {
 	        console.log(inputs);
 	        core.endGroup(); // Inputs
 
+	        // Run Install
+	        if (inputs.install) {
+	            const install = await checkOutput(inputs.install);
+	            console.log('install:', install);
+	        }
+
 	        // Step 1 - Check for error
 	        let error = '';
 	        if (inputs.path) {
@@ -31556,6 +31562,7 @@ function requireSrc () {
 	/**
 	 * Get Inputs
 	 * @typedef {Object} Inputs
+	 * @property {String} install
 	 * @property {String} build
 	 * @property {String} check
 	 * @property {String} [path]
@@ -31568,6 +31575,7 @@ function requireSrc () {
 	 */
 	function getInputs() {
 	    return {
+	        install: core.getInput('install', { required: true }),
 	        build: core.getInput('build', { required: true }),
 	        check: core.getInput('check', { required: true }),
 	        path: core.getInput('path'),
