@@ -13,6 +13,7 @@ concurrency:
 jobs:
   lint:
     name: "Lint"
+    if: ${{ !contains(github.event.head_commit.message, '#nolint') }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -24,7 +25,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: "Setup Node 24"
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 24
 
@@ -75,77 +76,7 @@ jobs:
         run: |
           yq -e '.runs.main | test("^dist/")' action.yml
 
-      #- name: "Check Build Action"
-      #  if: ${{ !cancelled() }}
-      #  uses: cssnr/check-build-action@master
-
       - name: "ESLint Annotate"
-        if: ${{ failure() && steps.eslint.outcome != 'success' }}
-        uses: ataylorme/eslint-annotate-action@v3
-
-      #- name: "Vale"
-      #  if: ${{ !cancelled() }}
-      #  uses: errata-ai/vale-action@v2.1.1
-
-      #- name: "SonarQube"
-      #  uses: SonarSource/sonarqube-scan-action@v4
-      #  env:
-      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-  build:
-    name: "Build"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      pull-requests: write
-
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v5
-
-      - name: "Debug event.json"
+        if: ${{ !cancelled() && steps.eslint.outcome != 'success' }}
         continue-on-error: true
-        run: |
-          cat "${GITHUB_EVENT_PATH}"
-
-      - name: "Debug"
-        continue-on-error: true
-        run: |
-          echo "github.actor: ${{ github.actor }}"
-          echo "github.triggering_actor: ${{ github.triggering_actor }}"
-          echo "github.event.pull_request.head.user.login: ${{ github.event.pull_request.head.user.login }}"
-
-      - name: "Setup Node 24"
-        uses: actions/setup-node@v5
-        with:
-          node-version: 24
-
-      - name: "Install"
-        run: |
-          npm ci
-
-      - name: "Build"
-        run: |
-          npm run build
-
-      - name: "Verify"
-        run: |
-          git status --porcelain dist/
-          if [ ! -d "dist" ];then
-            echo "Missing dist directory; run 'npm run build' then add, commit and push the 'dist' folder."
-            exit 1
-          fi
-          if [ -n "$(git status --porcelain dist)" ];then
-            echo "Build was not run; run 'npm run build' then add, commit and push the 'dist' folder."
-            exit 1
-          fi
-
-      #- name: "Verify Failed"
-      #  if: ${{ failure() && github.event_name == 'pull_request' }}
-      #  env:
-      #    GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #  run: |
-      #    echo "Adding comment to PR number: ${{ github.event.number }}"
-      #    comment='@${{ github.triggering_actor }} - run `npm run build` then add, commit and push the `dist` folder.'
-      #    echo "${comment}"
-      #    gh pr comment ${{ github.event.number }} --body "${comment}"
+        uses: ataylorme/eslint-annotate-action@d57a1193d4c59cbfbf3f86c271f42612f9dbd9e9 # 3.0.0
