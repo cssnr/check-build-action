@@ -3,8 +3,8 @@ const github = require('@actions/github')
 class Pull {
     /**
      * Pull Request Manager
-     * @param {Object} context
-     * @param {String} token
+     * @param {object} context
+     * @param {string} token
      */
     constructor(context, token) {
         if (!context.payload.pull_request) {
@@ -18,8 +18,8 @@ class Pull {
     /**
      * Get Comment by startsWith
      * NOTE: Process additional pages, max per_page is 100
-     * @param {String} start
-     * @return {Promise<Object|undefined>}
+     * @param {string} start
+     * @return {Promise<object|undefined>}
      */
     async getComment(start) {
         if (this.pull_request.comments && start) {
@@ -44,8 +44,8 @@ class Pull {
 
     /**
      * Create Comment
-     * @param {String} body
-     * @return {Promise<Object>}
+     * @param {string} body
+     * @return {Promise<object>}
      */
     async createComment(body) {
         return await this.octokit.rest.issues.createComment({
@@ -57,8 +57,8 @@ class Pull {
 
     /**
      * Delete Comment
-     * @param {String} comment_id
-     * @return {Promise<Object>}
+     * @param {string} comment_id
+     * @return {Promise<object>}
      */
     async deleteComment(comment_id) {
         return await this.octokit.rest.issues.deleteComment({
@@ -69,9 +69,9 @@ class Pull {
 
     /**
      * Update Comment
-     * @param {String} comment_id
-     * @param {String} body
-     * @return {Promise<Object>}
+     * @param {string} comment_id
+     * @param {string} body
+     * @return {Promise<object>}
      */
     // noinspection JSUnusedGlobalSymbols
     async updateComment(comment_id, body) {
