@@ -5,95 +5,89 @@ const github = require('@actions/github')
 
 const { Pull } = require('./api.js')
 
-;(async () => {
-    try {
-        core.info(`🏳️ Starting Check Build Action`)
+async function main() {
+    core.info(`🏳️ Starting Check Build Action`)
 
-        // Debug
-        core.startGroup('Debug: github.context')
-        console.log(github.context)
-        core.endGroup() // Debug github.context
-        core.startGroup('Debug: process.env')
-        console.log(process.env)
-        core.endGroup() // Debug process.env
+    // Debug
+    core.startGroup('Debug: github.context')
+    console.log(github.context)
+    core.endGroup() // Debug github.context
+    core.startGroup('Debug: process.env')
+    console.log(process.env)
+    core.endGroup() // Debug process.env
 
-        // Get Inputs
-        const inputs = getInputs()
-        core.startGroup('Get Inputs')
-        console.log(inputs)
-        core.endGroup() // Inputs
+    // Get Inputs
+    const inputs = getInputs()
+    core.startGroup('Get Inputs')
+    console.log(inputs)
+    core.endGroup() // Inputs
 
-        // Run Install
-        if (inputs.install) {
-            console.log('Running Install:', inputs.install)
-            const install = await checkOutput(inputs.install)
-            console.log('install:', install)
-        }
-
-        // Step 1 - Check for error
-        let error = ''
-        if (inputs.path) {
-            console.log('Checking Path:', inputs.path)
-            if (!fs.existsSync(inputs.path)) {
-                error = `Path not found: ${inputs.path}`
-            }
-        }
-        try {
-            const build = await checkOutput(inputs.build)
-            console.log('build:', build)
-            const check = await checkOutput(inputs.check)
-            console.log('check:', check)
-        } catch (e) {
-            console.log('error:', e)
-            error = e.message || 'Verification Failed.'
-            // return core.setFailed('Verification FAILED!!!')
-        }
-        console.log('error:', error)
-
-        // Step 2 - Update comment IF pull_request
-        let comment
-        const events = ['pull_request', 'pull_request_target']
-        if (inputs.comment && events.includes(github.context.eventName)) {
-            core.startGroup(`Processing PR: ${github.context.payload.number}`)
-            comment = await updatePull(inputs, error)
-            core.endGroup() // Processing PR
-        }
-        console.log('comment:', comment)
-
-        // Outputs
-        core.info('📩 Setting Outputs')
-        core.setOutput('id', comment?.id || 0)
-        core.setOutput('error', error.toString())
-
-        // Summary
-        if (inputs.summary) {
-            core.info('📝 Writing Job Summary')
-            try {
-                await addSummary(inputs, error, comment)
-            } catch (e) {
-                console.log(e)
-                core.error(`Error writing Job Summary ${e.message}`)
-            }
-        }
-
-        // Step 3 - Exit failed IF error
-        if (error) {
-            return core.setFailed(error)
-        }
-
-        core.info(`✅ \u001b[32;1mFinished Success`)
-    } catch (e) {
-        core.debug(e)
-        core.info(e.message)
-        core.setFailed(e.message)
+    // Run Install
+    if (inputs.install) {
+        console.log('Running Install:', inputs.install)
+        const install = await checkOutput(inputs.install)
+        console.log('install:', install)
     }
-})()
+
+    // Step 1 - Check for error
+    let error = ''
+    if (inputs.path) {
+        console.log('Checking Path:', inputs.path)
+        if (!fs.existsSync(inputs.path)) {
+            error = `Path not found: ${inputs.path}`
+        }
+    }
+    try {
+        const build = await checkOutput(inputs.build)
+        console.log('build:', build)
+        const check = await checkOutput(inputs.check)
+        console.log('check:', check)
+    } catch (e) {
+        console.log('error:', e)
+        error = e.message || 'Verification Failed.'
+        // return core.setFailed('Verification FAILED!!!')
+    }
+    console.log('error:', error)
+
+    // Step 2 - Update comment IF pull_request
+    let comment
+    const events = ['pull_request', 'pull_request_target']
+    if (inputs.comment && events.includes(github.context.eventName)) {
+        core.startGroup(`Processing PR: ${github.context.payload.number}`)
+        comment = await updatePull(inputs, error)
+        core.endGroup() // Processing PR
+    }
+    console.log('comment:', comment)
+
+    // Outputs
+    core.info('📩 Setting Outputs')
+    core.setOutput('id', comment?.id || 0)
+    core.setOutput('error', error.toString())
+
+    // Summary
+    if (inputs.summary) {
+        core.info('📝 Writing Job Summary')
+        try {
+            await addSummary(inputs, error, comment)
+        } catch (e) {
+            console.log(e)
+            core.error(`Error writing Job Summary ${e.message}`)
+        }
+    }
+
+    // Step 3 - Exit failed IF error
+    if (error) {
+        return core.setFailed(error)
+    }
+
+    core.info(`✅ \u001b[32;1mFinished Success`)
+}
 
 /**
  * Update PR
  * @param {Inputs} inputs
- * @param {*} error
- * @return {Promise<Object|undefined>}
+ * @param {string} error
+ * @return {Promise<object|undefined>}
  */
 async function updatePull(inputs, error) {
     if (!github.context.payload.pull_request?.number) {
@@ -133,7 +127,7 @@ async function updatePull(inputs, error) {
         const mention = inputs.mention ? `@${actor} - ` : ''
         const body = `${id}\n${mention}${inputs.message}`
         const response = await pull.createComment(body)
-        // TODO: Add error handling
+        // NOTE: Add error handling
         console.log('response.status:', response.status)
         return response.data
     }
@@ -141,9 +135,9 @@ async function updatePull(inputs, error) {
 
 /**
  * Check Command Output
- * @param {String} command
- * @param {Object} [options]
- * @return {Promise<String>}
+ * @param {string} command
+ * @param {object} [options]
+ * @return {Promise<string>}
  */
 async function checkOutput(command, options = {}) {
     const args = command.split(' ')
@@ -170,8 +164,8 @@ async function checkOutput(command, options = {}) {
 /**
  * Add Summary
  * @param {Inputs} inputs
- * @param {String} error
- * @param {Object} comment
+ * @param {string} error
+ * @param {object} comment
  * @return {Promise<void>}
  */
 async function addSummary(inputs, error, comment) {
@@ -208,16 +202,16 @@ async function addSummary(inputs, error, comment) {
 
 /**
  * Get Inputs
- * @typedef {Object} Inputs
- * @property {String} install
- * @property {String} build
- * @property {String} check
- * @property {String} [path]
- * @property {Boolean} comment
- * @property {String} message
- * @property {Boolean} mention
- * @property {Boolean} summary
- * @property {String} token
+ * @typedef {object} Inputs
+ * @property {string} install
+ * @property {string} build
+ * @property {string} check
+ * @property {string} [path]
+ * @property {boolean} comment
+ * @property {string} message
+ * @property {boolean} mention
+ * @property {boolean} summary
+ * @property {string} token
  * @return {Inputs}
  */
 function getInputs() {
@@ -233,3 +227,9 @@ function getInputs() {
         token: core.getInput('token', { required: true }),
     }
 }
+
+main().catch((e) => {
+    core.debug(e)
+    core.info(e.message)
+    core.setFailed(e.message)
+})

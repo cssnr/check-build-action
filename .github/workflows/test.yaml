@@ -55,15 +55,15 @@ jobs:
 
       - name: "Verify Outputs"
         env:
-          ERROR: ${{ steps.test.outputs.error }}
+          error: ${{ steps.test.outputs.error }}
         run: |
           echo "id: ${{ steps.test.outputs.id }}"
           #if [ -z '${{ steps.test.outputs.id }}' ];then
           #  echo "No Output: id"
           #  exit 1
           #fi
-          echo "error: ${ERROR}"
-          #if [ -z "${ERROR}" ];then
+          echo "error: ${error}"
+          #if [ -z "${error}" ];then
           #  echo "No Output: error"
           #  exit 1
           #fi
